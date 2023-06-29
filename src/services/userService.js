@@ -14,22 +14,22 @@ let handleUserLogin = (email, password) => {
             let isExist = await checkUserEmail(email)
 
             if (isExist) {
-                //user already exists
-                let user = await db.User.findOne({ 
+                //tìm user 
+                let user = await db.User.findOne({ //sequenlize
                     attributes: ['email','roleId','password'], //cần lấy pass để compare
                     where:{email: email},
-                    raw: true, //lấy đầy đủ dữ liệu từ db
+                    raw: true, //lấy đầy đủ dữ liệu từ db *dạng object
                 })
 
                 if (user) {
                     //compare the password
-                    let check =   bcrypt.compareSync( password, user.password);
+                    let check = bcrypt.compareSync( password, user.password);
                      
                     if (check) {
                         userData.errCode = 0;
                         userData.errMessage = `Ok`;
 
-                        //xóa password không hiện trong userData{}
+                        //xóa password trong userData{} để bảo mật
                         delete user.password;
                         userData.user = user;
                         console.log(userData.user);
