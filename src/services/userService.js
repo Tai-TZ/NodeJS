@@ -58,8 +58,6 @@ let handleUserLogin = (email, password) => {
     })
 }
 
-
-
 //check user exists
 let checkUserEmail = (userEmail) => {
     return new Promise(async(resolve, reject) => {
@@ -80,7 +78,34 @@ let checkUserEmail = (userEmail) => {
     })
 }
 
+//lấy tất cả USERS
+let getAllUsers = (userId) =>{
+    return new Promise(async(resolve, reject) => {
+        try {
+            let users = '';
+            if (userId === 'ALL') {
+                users = await db.User.findAll({
+                    attributes:{
+                        exclude: ['password'] //ngoại trừ password
+                    }
+                })
+            }
+            if (userId && userId !== 'ALL') {
+                users = await db.User.findOne({
+                    where: {id: userId},
+                    attributes:{
+                        exclude: ['password'] //ngoại trừ password
+                    }
+                    
+                })
+            } 
 
+            resolve(users)
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 
  
 
@@ -88,5 +113,6 @@ let checkUserEmail = (userEmail) => {
 
 
 module.exports = {
-    handleUserLogin:handleUserLogin
+    handleUserLogin:handleUserLogin,
+    getAllUsers:getAllUsers
 }
