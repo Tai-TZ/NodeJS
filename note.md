@@ -38,7 +38,7 @@
 
 9. npm i --save bcryptjs@2.4.3: package mã hóa mật khẩu người dùng
     
-
+10. npm i --save cors@2.8.5 : cầu hình cho server chạy api vào tên miền cụ thể, dùng để fix lỗi cors
 
 
 

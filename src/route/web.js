@@ -28,7 +28,7 @@ let initWebRoutes = (app) => {
  
 
 
-    //api
+    //api cho front end
     router.post('/api/login',userController.handleLogin)
     
 
