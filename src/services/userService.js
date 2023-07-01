@@ -7,8 +7,9 @@ import db from '../models/index'
 import bcrypt from 'bcryptjs'; // hash password
 
  
+const salt = bcrypt.genSaltSync(10);// hash password
 
-//xữ lý login
+// api xữ lý login /api/login
 let handleUserLogin = (email, password) => {
     return new Promise(async(resolve, reject) => {
         try { 
@@ -78,7 +79,7 @@ let checkUserEmail = (userEmail) => {
     })
 }
 
-//lấy tất cả USERS
+// api lấy tất cả USERS /api/get-all-users
 let getAllUsers = (userId) =>{
     return new Promise(async(resolve, reject) => {
         try {
@@ -109,10 +110,131 @@ let getAllUsers = (userId) =>{
 
  
 
+// api tạo mới user /api/create-new-user
+let createNewUser = (data) => {
+    return new Promise(async(resolve, reject) => {
+         try {
+            //check email is exist
+            let check = await checkUserEmail(data.email);
+            if (check === true) {
+                resolve({
+                    errCode: 1,
+                    message: 'Your email is already used, pls try another email!!'
+                })
+            } 
+            else{ 
+                let hashPasswordFromBcrypt = await hashUserPassword(data.password)
+                await db.User.create({
+                    email: data.email,
+                    password: hashPasswordFromBcrypt,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    address: data.address,
+                    phonenumber: data.phonenumber,
+                    gender: data.gender === '1' ? true : false, // femaile = 0 , male = 1
+                    roleId: data.role,
+                })
+            }
+            resolve({
+                errCode: 0,
+                message: 'ok'
+            })
+         } catch (e) {
+            reject(e);
+         } 
+    })
+}
+
+
+//Hàm mã hóa password
+let hashUserPassword = (password) => {
+    // dùng promises đảm bảo hàm này luôn trả kết quả ra và tránh xử lý bất đồng bộ của js
+    return new Promise(async (resolve, reject) => {
+        try {
+            let hashPassword = await bcrypt.hashSync(password, salt); //xữ lý hash password từ pack bcryptjs
+            resolve(hashPassword)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+//api xóa user /api/delete-user
+let deleteUser = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        let foundUser = await db.User.findOne({
+            where:{id: userId}
+        })
+
+        if (!foundUser) {
+            resolve({
+                errCode: 2,
+                message: `User isn't exist`
+            })
+        }
+
+         
+        await db.User.destroy({
+            where:{id: userId}
+        })
+
+        resolve({
+            errCode: 0,
+            message: `User deleted successfully`
+        })
+    })
+}
+
+
+//api sửa user /api/edit-user
+let updateUserData = ( data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            if (!data.id) {
+                resolve({
+                    errCode: 2,
+                    errMessage: 'Missing required parameter!!'
+                })
+            }
+
+            let user = await db.User.findOne({ //tìm id của user được chọn edit trong db, lấy data lên
+                where: { id: data.id },
+                raw: false
+            })
+
+            if (user) { //tìm được user, update các biến data truyền vào từ input
+                
+                user.firstName = data.firstName,
+                user.lastName = data.lastName,
+                user.address = data.address,
+
+                await user.save() //lưu lại info
+                 
+
+                
+                resolve({
+                    errCode: 0,
+                    message: 'Update successful!!'
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    message: 'User not found!!'
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 
 
 
 module.exports = {
     handleUserLogin:handleUserLogin,
-    getAllUsers:getAllUsers
+    getAllUsers:getAllUsers,
+    createNewUser:createNewUser,
+    deleteUser:deleteUser,
+    updateUserData:updateUserData,
 }
