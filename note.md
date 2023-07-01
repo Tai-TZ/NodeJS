@@ -11,7 +11,7 @@
 # *Giúp cho có thể vừa code project bởi Nodejs mới và project bởi Nodejs cũ *
 # 1. Gỡ Nodejs hiện tại, 2. install nvm trên github, 3.install nodejs(cài các version nodejs muốn cài) nvm install *node_ver, 4 Chỉ sử dụng một version nodejs, nvm use *node_ver
 
-
+# Sử dụng Emitter event để clear data, 1 component FIRE EVENT , 1 component LISTEN EVENT
 
 1. npm init: khởi tạo dự án
 
@@ -39,6 +39,9 @@
 9. npm i --save bcryptjs@2.4.3: package mã hóa mật khẩu người dùng
     
 10. npm i --save cors@2.8.5 : cầu hình cho server chạy api vào tên miền cụ thể, dùng để fix lỗi cors
+
+
+
 
 
 
