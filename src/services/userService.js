@@ -20,7 +20,7 @@ let handleUserLogin = (email, password) => {
             if (isExist) {
                 //tìm user 
                 let user = await db.User.findOne({ //sequenlize
-                    attributes: ['email', 'roleId', 'password'], //cần lấy pass để compare
+                    attributes: ['email', 'roleId', 'password', 'firstName', 'lastName'], //cần lấy pass để compare
                     where: { email: email },
                     raw: true, //lấy đầy đủ dữ liệu từ db *dạng object
                 })
@@ -229,10 +229,36 @@ let updateUserData = (data) => {
 
 
 
+//api getAllCode
+let getAllCodeService = (typeInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!typeInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter!!'
+                })
+            }
+            else {
+                let res = {}
+                let allcode = await db.Allcode.findAll({//lấy tất cả trong bảng allcode 
+                    where: { type: typeInput } //lọc các loại type 
+                });
+                res.errCode = 0
+                res.data = allcode //gán data lấy từ db 
+                resolve(res);
+            }
+
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
     createNewUser: createNewUser,
     deleteUser: deleteUser,
     updateUserData: updateUserData,
+    getAllCodeService: getAllCodeService,
 }

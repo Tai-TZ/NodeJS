@@ -40,8 +40,10 @@
     
 10. npm i --save cors@2.8.5 : cầu hình cho server chạy api vào tên miền cụ thể, dùng để fix lỗi cors
 
+11. Redux for Reactjs: thư viện quản lý state như localstorage nhưng bảo mật hơn 
 
-
+12. React Slick: npm install --save react-slick@0.28.1, thư viện css như bootstraps
+    slick carousel: npm install --save slick-carousel@1.8.1: tạo các img, text,.. thành slideshow đẹp 
 
 
 

@@ -85,6 +85,21 @@ let handleDeleteUser = async (req, res) => {
 }
 
 
+//api lấy getCode
+let getAllCode = async (req, res) => {
+    try {
+        let data = await userSevice.getAllCodeService(req.query.type); //chờ service lấy data ra
+        return res.status(200).json(data); // trả ra data dưới dạng json object
+    } catch (e) {
+        console.log('Get all code error: ', e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server'
+        })
+    }
+}
+
+
 
 module.exports = {
     handleLogin: handleLogin,
@@ -92,4 +107,5 @@ module.exports = {
     handleCreateNewUser: handleCreateNewUser,
     handleEditUser: handleEditUser,
     handleDeleteUser: handleDeleteUser,
+    getAllCode: getAllCode,
 }   
