@@ -45,7 +45,9 @@
 12. React Slick: npm install --save react-slick@0.28.1, thư viện css như bootstraps
     slick carousel: npm install --save slick-carousel@1.8.1: tạo các img, text,.. thành slideshow đẹp 
 
+13. react-redux: thư viện giúp conn redux - react
 
+14.  react-image-lightbox: npm i --save  react-image-lightbox@5.1.1, thư viện giúp phóng to ảnh
 
 
 
