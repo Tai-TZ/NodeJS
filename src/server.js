@@ -35,8 +35,11 @@ app.use(function (req, res, next) { //middleware cho phép đường link 3000 g
 
 
 //config app 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({ limit: '50mb' })) //tăng giới hạn file upload
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
 
 viewEngine(app);
 initWebRoutes(app)
