@@ -193,7 +193,7 @@ let deleteUser = (userId) => {
 let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.id) { //check id
+            if (!data.id || !data.roleId || !data.positionId || !data.gender) { //check id
                 resolve({
                     errCode: 2,
                     errMessage: 'Missing required parameter!!'
@@ -207,11 +207,15 @@ let updateUserData = (data) => {
 
             if (user) { //tìm được user, update các biến data truyền vào từ input
 
-                user.firstName = data.firstName,
-                    user.lastName = data.lastName,
-                    user.address = data.address,
+                user.firstName = data.firstName
+                user.lastName = data.lastName
+                user.address = data.address
+                user.roleId = data.roleId
+                user.positionId = data.positionId
+                user.gender = data.gender
+                user.phonenumber = data.phonenumber
 
-                    await user.save() //lưu lại info
+                await user.save() //lưu lại info
                 resolve({
                     errCode: 0,
                     message: 'Update successful!!'
