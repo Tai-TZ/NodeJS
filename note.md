@@ -47,11 +47,13 @@
 
 13. react-redux: thư viện giúp conn redux - react
 
-14.  react-image-lightbox: npm i --save  react-image-lightbox@5.1.1, thư viện giúp phóng to ảnh
+14. react-image-lightbox: npm i --save  react-image-lightbox@5.1.1, thư viện giúp phóng to ảnh
 
+15. react-markdown-editor-lite: npm install --save react-markdown-editor-lite@1.3.0 dùng để tạo một trình soạn thảo markdown trong ứng dụng web, ví dụ: tạo blog, tạo trang chi tiết ng dùng
 
+16. dependency của "react-markdown-editor-lite":  npm install --save markdown-it@12.1.0
 
-
+17. react-select:  npm install --save react-select@4.3.1, tích hợp vừa SEARCH vừa SELECT
 
 
 
