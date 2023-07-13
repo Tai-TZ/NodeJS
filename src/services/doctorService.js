@@ -56,19 +56,36 @@ let getAllDoctors = () => {
 let saveDetailInforDoctor = (inputData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!inputData.doctorId || !inputData.contentHTML || !inputData.contentMarkdown) {
+            if (!inputData.doctorId || !inputData.contentHTML || !inputData.contentMarkdown || !inputData.action) {
                 console.log('check from server', inputData)
                 resolve({
                     errCode: 1,
                     errMessage: "Missing parameter"
                 })
-            } else {
-                await db.Markdown.create({
-                    contentHTML: inputData.contentHTML,
-                    contentMarkdown: inputData.contentMarkdown,
-                    description: inputData.description,
-                    doctorId: inputData.doctorId
-                })
+            } else { //tạo
+                if (inputData.action === 'CREATE') {
+                    await db.Markdown.create({
+                        contentHTML: inputData.contentHTML,
+                        contentMarkdown: inputData.contentMarkdown,
+                        description: inputData.description,
+                        doctorId: inputData.doctorId
+                    })
+
+                } else if (inputData.action === 'EDIT') { //sửa
+                    let doctorMarkdown = await db.Markdown.findOne({
+                        where: { doctorId: inputData.doctorId },
+                        raw: false //trả về {} sqlize để lưu vào db
+                    })
+
+
+
+                    if (doctorMarkdown) {
+                        doctorMarkdown.contentHTML = inputData.contentHTML;
+                        doctorMarkdown.contentMarkdown = inputData.contentMarkdown;
+                        doctorMarkdown.description = inputData.description;
+                        await doctorMarkdown.save() //lưu
+                    }
+                }
 
                 resolve({
                     errCode: 0,
@@ -99,7 +116,7 @@ let bodyInforDoctorById = (inputId) => {
                         id: inputId
                     },
                     attributes: {
-                        exclude: ['password', 'image'] //ko lấy pass, img
+                        exclude: ['password'] //ko lấy pass
                     },
                     include: [ // same join table
                         {
@@ -109,9 +126,18 @@ let bodyInforDoctorById = (inputId) => {
                         { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
 
                     ],
-                    raw: true,
+                    raw: false,
                     nest: true // các thuộc tính chung 1 object thì sẽ gom nhóm lại cho dễ nhìn
                 })
+
+
+                //conver img buffer -> base64
+                if (data && data.image) {
+                    data.image = new Buffer.from(data.image, 'base64').toString('binary')
+                }
+
+                if (!data) data = {}
+
 
                 resolve({
                     errCode: 0,
