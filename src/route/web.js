@@ -43,7 +43,8 @@ let initWebRoutes = (app) => {
     router.post('/api/save-infor-doctors', doctorController.postInforDoctor)
     router.get('/api/get-detail-doctor-by-id', doctorController.getDetailDoctorById)
 
-
+    // Phương thức bulk cho phép chèn nhiều bản ghi vào bảng cơ sở dữ liệu bằng một lệnh gọi hàm duy nhất
+    router.post('/api/bulk-create-schedule', doctorController.bulkCreateSchedule)
 
 
 
