@@ -13,6 +13,10 @@
 
 # Sử dụng Emitter event để clear data, 1 component FIRE EVENT , 1 component LISTEN EVENT
 
+# req.body (POST) , req.query (GET)
+
+
+
 1. npm init: khởi tạo dự án
 
 2. npm i body-parser@1.19.0 dotenv@8.2.0 ejs@3.1.5 express@4.17.1
