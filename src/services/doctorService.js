@@ -174,7 +174,7 @@ let bulkCreateSchedule = (data) => {
                     })
                 }
 
-                //get all existing data, lấy nhưng data tồn tại rồi
+                //get all existing data, lấy những data tồn tại rồi
                 let existing = await db.Schedule.findAll(
                     {
                         where: { doctorId: data.doctorId, date: data.formatedDate },
@@ -183,18 +183,10 @@ let bulkCreateSchedule = (data) => {
                     }
                 )
 
-                //convert date 
-                if (existing && existing.length > 0) {
-                    existing = existing.map(item => {
-                        item.date = new Date(item.date).getTime();
-                        return item
-                    })
-                }
-
 
                 //so sánh 2 mảng giữa schedule truyền lên và existing đã tồn tại trong db
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && a.date === b.date
+                    return a.timeType === b.timeType && +a.date === +b.date
                 }); //chỉ chèn những phần tử khác biệt vào db
 
 
@@ -232,7 +224,12 @@ let getScheduleByDate = (doctorId, date) => {
                     where: {
                         doctorId: doctorId,
                         date: date,
-                    }
+                    },
+                    include: [
+                        { model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi'] },
+                    ],
+                    raw: true,
+                    nest: true
                 })
 
                 if (!dataSchedule) dataSchedule = []
