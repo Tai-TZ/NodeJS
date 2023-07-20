@@ -60,14 +60,20 @@ let getAllDoctors = () => {
 let saveDetailInforDoctor = (inputData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!inputData.doctorId || !inputData.contentHTML || !inputData.contentMarkdown || !inputData.action) {
+            if (!inputData.doctorId || !inputData.contentHTML || !inputData.contentMarkdown || !inputData.action ||
+                !inputData.selectedPrice || !inputData.selectedPayment || !inputData.selectedProvince ||
+                !inputData.nameClinic || !inputData.addressClinic || !inputData.note) {
+
                 console.log('check from server', inputData)
                 resolve({
                     errCode: 1,
                     errMessage: "Missing parameter"
                 })
-            } else { //tạo
-                if (inputData.action === 'CREATE') {
+            } else {
+                //upsert === kết hợp hai từ "update" và "insert"
+
+                // =============== upsert to MarkDown
+                if (inputData.action === 'CREATE') {//create
                     await db.Markdown.create({
                         contentHTML: inputData.contentHTML,
                         contentMarkdown: inputData.contentMarkdown,
@@ -81,8 +87,6 @@ let saveDetailInforDoctor = (inputData) => {
                         raw: false //trả về {} sqlize để lưu vào db
                     })
 
-
-
                     if (doctorMarkdown) {
                         doctorMarkdown.contentHTML = inputData.contentHTML;
                         doctorMarkdown.contentMarkdown = inputData.contentMarkdown;
@@ -90,6 +94,43 @@ let saveDetailInforDoctor = (inputData) => {
                         await doctorMarkdown.save() //lưu
                     }
                 }
+
+
+
+                // =============== upsert to Doctor_infor table
+                let doctorInfor = await db.Doctor_Infor.findOne({ //return {} : undefined
+                    where: {
+                        doctorId: inputData.doctorId,
+                    },
+                    raw: false
+                })
+
+                if (doctorInfor) {  //nếu tìm ra doctor thì update
+                    //update
+                    doctorInfor.doctorId = inputData.doctorId;
+                    doctorInfor.priceId = inputData.selectedPrice;
+                    doctorInfor.provinceId = inputData.selectedProvince;
+                    doctorInfor.paymentId = inputData.selectedPayment;
+                    doctorInfor.nameClinic = inputData.nameClinic;
+                    doctorInfor.addressClinic = inputData.addressClinic;
+                    doctorInfor.note = inputData.note;
+                    await doctorInfor.save() //lưu
+                }
+                else {//nếu ko tìm ra doctor thì create
+                    //create 
+                    await db.Doctor_Infor.create({
+                        doctorId: inputData.doctorId,
+                        priceId: inputData.selectedPrice,
+                        provinceId: inputData.selectedProvince,
+                        paymentId: inputData.selectedPayment,
+                        nameClinic: inputData.nameClinic,
+                        addressClinic: inputData.addressClinic,
+                        note: inputData.note,
+                    })
+
+                }
+
+
 
                 resolve({
                     errCode: 0,
