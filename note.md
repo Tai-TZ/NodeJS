@@ -16,6 +16,9 @@
 # req.body (POST) , req.query (GET)
 
 
+# #################################################################################
+# Fix lỗi đặt tên tablename của Sequelize: mặc định những table đứng 1 mình thì sẽ bị sqlize thêm "s" -> không tìm thấy ví dụ: "database.tables",   cách fix thêm ** freezeTableName: true ** vào bên dưới  modelName: trong model của table đó
+
 
 1. npm init: khởi tạo dự án
 

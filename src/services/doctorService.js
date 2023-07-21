@@ -146,7 +146,7 @@ let saveDetailInforDoctor = (inputData) => {
 
 
 // lấy detail theo id
-let bodyInforDoctorById = (inputId) => {
+let getDetailDoctorById = (inputId) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!inputId) {
@@ -170,6 +170,20 @@ let bodyInforDoctorById = (inputId) => {
                         },
                         { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
 
+
+                        {
+                            model: db.Doctor_Infor,
+                            attributes: {
+                                exclude: ['id', 'doctorId'] //bỏ đi
+                            },
+
+                            include: [
+                                { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
+                                { model: db.Allcode, as: 'provinceTypeData', attributes: ['valueEn', 'valueVi'] },
+                                { model: db.Allcode, as: 'paymentTypeData', attributes: ['valueEn', 'valueVi'] },
+
+                            ]
+                        },
                     ],
                     raw: false,
                     nest: true // các thuộc tính chung 1 object thì sẽ gom nhóm lại cho dễ nhìn
@@ -290,7 +304,7 @@ module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
-    bodyInforDoctorById: bodyInforDoctorById,
+    getDetailDoctorById: getDetailDoctorById,
     bulkCreateSchedule: bulkCreateSchedule,
     getScheduleByDate: getScheduleByDate,
 }
