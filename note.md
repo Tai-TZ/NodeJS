@@ -20,6 +20,7 @@
 # Fix lỗi đặt tên tablename của Sequelize: mặc định những table đứng 1 mình thì sẽ bị sqlize thêm "s" -> không tìm thấy ví dụ: "database.tables",   cách fix thêm ** freezeTableName: true ** vào bên dưới  modelName: trong model của table đó
 
 
+# NODEJS
 1. npm init: khởi tạo dự án
 
 2. npm i body-parser@1.19.0 dotenv@8.2.0 ejs@3.1.5 express@4.17.1
@@ -47,6 +48,7 @@
     
 10. npm i --save cors@2.8.5 : cầu hình cho server chạy api vào tên miền cụ thể, dùng để fix lỗi cors
 
+# REACTJS
 11. Redux for Reactjs: thư viện quản lý state như localstorage nhưng bảo mật hơn 
 
 12. React Slick: npm install --save react-slick@0.28.1, thư viện css như bootstraps
@@ -62,6 +64,7 @@
 
 17. react-select:  npm install --save react-select@4.3.1, tích hợp vừa SEARCH vừa SELECT
 
+18. npm i --save react-number-format@4.6.4: thư viện React được sử dụng để hiển thị các con số theo quy tắc, kiểu định dạng và các tùy chọn khác nhau.
 
 
 

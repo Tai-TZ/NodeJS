@@ -47,7 +47,7 @@ let initWebRoutes = (app) => {
     router.post('/api/bulk-create-schedule', doctorController.bulkCreateSchedule)
 
     router.get('/api/get-schedule-doctor-by-date', doctorController.getScheduleByDate) //lấy schedule lên cli
-
+    router.get('/api/get-extra-infor-doctor-by-id', doctorController.getExtraInforDoctorById) //lấy các thông tin address, price, province
 
 
 
