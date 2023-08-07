@@ -229,7 +229,8 @@ let bulkCreateSchedule = (data) => {
                     })
                 }
 
-                //get all existing data, lấy những data tồn tại rồi
+
+                // get all existing data, lấy những data tồn tại rồi
                 let existing = await db.Schedule.findAll(
                     {
                         where: { doctorId: data.doctorId, date: data.formatedDate },
@@ -237,11 +238,11 @@ let bulkCreateSchedule = (data) => {
                         raw: true
                     }
                 )
-
+                // console.log('existing', existing)
 
                 //so sánh 2 mảng giữa schedule truyền lên và existing đã tồn tại trong db
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && +a.date === +b.date
+                    return a.timeType === b.timeType && +a.date === +b.date;
                 }); //chỉ chèn những phần tử khác biệt vào db
 
 
@@ -267,6 +268,8 @@ let bulkCreateSchedule = (data) => {
 
 //lấy schedule lên cli
 let getScheduleByDate = (doctorId, date) => {
+
+
     return new Promise(async (resolve, reject) => {
         try {
             if (!doctorId || !date) {
@@ -286,6 +289,8 @@ let getScheduleByDate = (doctorId, date) => {
                     raw: true,
                     nest: true
                 })
+
+                console.log('dataSchedule ', dataSchedule)
 
                 if (!dataSchedule) dataSchedule = []
                 resolve({
@@ -339,6 +344,76 @@ let getExtraInforDoctorById = (idInput) => {
     })
 }
 
+
+
+
+let getProfileDoctorById = (inputId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!inputId) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing required parameters"
+                })
+            }
+            else {
+                let data = await db.User.findOne({
+                    where: {
+                        id: inputId
+                    },
+                    attributes: {
+                        exclude: ['password'] //ko lấy pass
+                    },
+                    include: [ // same join table
+                        {
+                            model: db.Markdown,
+                            attributes: ['description', 'contentHTML', 'contentMarkdown']
+                        },
+                        { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
+
+                        {
+                            model: db.Doctor_Infor,
+                            attributes: {
+                                exclude: ['id', 'doctorId'] //bỏ đi
+                            },
+
+                            include: [
+                                { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
+                                { model: db.Allcode, as: 'provinceTypeData', attributes: ['valueEn', 'valueVi'] },
+                                { model: db.Allcode, as: 'paymentTypeData', attributes: ['valueEn', 'valueVi'] },
+
+                            ]
+                        },
+                    ],
+                    raw: false,
+                    nest: true // các thuộc tính chung 1 object thì sẽ gom nhóm lại cho dễ nhìn
+                })
+
+
+                //conver img buffer -> base64
+                if (data && data.image) {
+                    data.image = new Buffer.from(data.image, 'base64').toString('binary')
+                }
+
+                if (!data) data = {}
+
+
+                resolve({
+                    errCode: 0,
+                    data: data
+                })
+
+
+
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
@@ -346,6 +421,7 @@ module.exports = {
     getDetailDoctorById: getDetailDoctorById,
     bulkCreateSchedule: bulkCreateSchedule,
     getScheduleByDate: getScheduleByDate,
-    getExtraInforDoctorById: getExtraInforDoctorById
+    getExtraInforDoctorById: getExtraInforDoctorById,
+    getProfileDoctorById: getProfileDoctorById
 }
 
