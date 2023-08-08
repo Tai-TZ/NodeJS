@@ -36,7 +36,7 @@ let handleUserLogin = (email, password) => {
                         //xóa password trong userData{} để bảo mật
                         delete user.password;
                         userData.user = user;
-                        console.log(userData.user);
+
                     } else {
                         userData.errCode = 3
                         userData.errMessage = `Wrong Password`

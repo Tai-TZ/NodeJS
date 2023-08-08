@@ -48,23 +48,27 @@
     
 10. npm i --save cors@2.8.5 : cầu hình cho server chạy api vào tên miền cụ thể, dùng để fix lỗi cors
 
-# REACTJS
-11. Redux for Reactjs: thư viện quản lý state như localstorage nhưng bảo mật hơn 
+11. npm i --save-exact nodemailer@6.6.3: Cài nodemailer để làm chức năng gửi mail
 
-12. React Slick: npm install --save react-slick@0.28.1, thư viện css như bootstraps
+12. npm i --save-exact uuid@8.3.2: tạo ra 1 chuỗi định dạng duy nhất cho ID 
+
+# REACTJS
+1. Redux for Reactjs: thư viện quản lý state như localstorage nhưng bảo mật hơn 
+
+2. React Slick: npm install --save react-slick@0.28.1, thư viện css như bootstraps
     slick carousel: npm install --save slick-carousel@1.8.1: tạo các img, text,.. thành slideshow đẹp 
 
-13. react-redux: thư viện giúp conn redux - react
+3. react-redux: thư viện giúp conn redux - react
 
-14. react-image-lightbox: npm i --save  react-image-lightbox@5.1.1, thư viện giúp phóng to ảnh
+4. react-image-lightbox: npm i --save  react-image-lightbox@5.1.1, thư viện giúp phóng to ảnh
 
-15. react-markdown-editor-lite: npm install --save react-markdown-editor-lite@1.3.0 dùng để tạo một trình soạn thảo markdown trong ứng dụng web, ví dụ: tạo blog, tạo trang chi tiết ng dùng
+5. react-markdown-editor-lite: npm install --save react-markdown-editor-lite@1.3.0 dùng để tạo một trình soạn thảo markdown trong ứng dụng web, ví dụ: tạo blog, tạo trang chi tiết ng dùng
 
-16. dependency của "react-markdown-editor-lite":  npm install --save markdown-it@12.1.0
+6. dependency của "react-markdown-editor-lite":  npm install --save markdown-it@12.1.0
 
-17. react-select:  npm install --save react-select@4.3.1, tích hợp vừa SEARCH vừa SELECT
+7. react-select:  npm install --save react-select@4.3.1, tích hợp vừa SEARCH vừa SELECT
 
-18. npm i --save react-number-format@4.6.4: thư viện React được sử dụng để hiển thị các con số theo quy tắc, kiểu định dạng và các tùy chọn khác nhau.
+8. npm i --save react-number-format@4.6.4: thư viện React được sử dụng để hiển thị các con số theo quy tắc, kiểu định dạng và các tùy chọn khác nhau.
 
 
 
