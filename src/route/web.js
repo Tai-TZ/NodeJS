@@ -54,12 +54,13 @@ let initWebRoutes = (app) => {
 
 
     //api patients
-    router.post('/api/patient-book-appointment', patientController.postBookAppointment) // user book không tạo tài khoản
+    router.post('/api/patient-book-appointment', patientController.postBookAppointment) // lưu user book lịch khám  
     router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment) // verify bằng token và doctorId trên thanh Url
 
 
     //api specialty 
     router.post('/api/create-new-specialty', specialtyController.createSpecialty) // verify bằng token và doctorId trên thanh Url
+    router.get('/api/get-specialty', specialtyController.getAllSpecialty)
 
 
 
