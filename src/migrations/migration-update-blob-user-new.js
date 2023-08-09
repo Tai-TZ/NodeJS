@@ -1,7 +1,7 @@
 
 //update type image theo kiểu blob để lưu 
 module.exports = {
-    up: (queryInterface, Sequelize) => {
+    up: (queryInterface, Sequelize) => { //thực hiện thay đổi trên db
         return Promise.all([
             queryInterface.changeColumn('Users', 'image', { //table name  //colum
                 type: Sequelize.BLOB('long'),
@@ -10,7 +10,7 @@ module.exports = {
         ])
     },
 
-    down: (queryInterface, Sequelize) => {
+    down: (queryInterface, Sequelize) => { //hoàn tác
         return Promise.all([
             queryInterface.changeColumn('Users', 'image', {
                 type: Sequelize.STRING,

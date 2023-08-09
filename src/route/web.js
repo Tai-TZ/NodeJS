@@ -3,6 +3,7 @@ import homeController from "../controllers/homeController";
 import userController from "../controllers/userController"
 import doctorController from "../controllers/doctorController"
 import patientController from "../controllers/patientController"
+import specialtyController from "../controllers/specialtyController";
 
 let router = express.Router();
 let initWebRoutes = (app) => {
@@ -53,8 +54,16 @@ let initWebRoutes = (app) => {
 
 
     //api patients
-    router.post('/api/patient-book-appointment', patientController.postBookAppointment) // dành cho user book mà không tạo tài khoản, mình tự tạo cho user này
-    router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment)
+    router.post('/api/patient-book-appointment', patientController.postBookAppointment) // user book không tạo tài khoản
+    router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment) // verify bằng token và doctorId trên thanh Url
+
+
+    //api specialty 
+    router.post('/api/create-new-specialty', specialtyController.createSpecialty) // verify bằng token và doctorId trên thanh Url
+
+
+
+
 
     return app.use("/", router)
 
