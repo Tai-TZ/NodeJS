@@ -50,7 +50,7 @@
 
 11. npm i --save-exact nodemailer@6.6.3: Cài nodemailer để làm chức năng gửi mail
 
-12. npm i --save-exact uuid@8.3.2: tạo ra 1 chuỗi định dạng duy nhất cho ID 
+12. npm i --save-exact uuid@8.3.2: tạo ra 1 chuỗi định dạng duy nhất cho ID (tạo token)
 
 # REACTJS
 1. Redux for Reactjs: thư viện quản lý state như localstorage nhưng bảo mật hơn 

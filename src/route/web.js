@@ -54,8 +54,7 @@ let initWebRoutes = (app) => {
 
     //api patients
     router.post('/api/patient-book-appointment', patientController.postBookAppointment) // dành cho user book mà không tạo tài khoản, mình tự tạo cho user này
-
-
+    router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment)
 
     return app.use("/", router)
 
