@@ -61,6 +61,7 @@ let initWebRoutes = (app) => {
     //api specialty 
     router.post('/api/create-new-specialty', specialtyController.createSpecialty) // verify bằng token và doctorId trên thanh Url
     router.get('/api/get-specialty', specialtyController.getAllSpecialty)
+    router.get('/api/get-detail-specialty-by-id', specialtyController.getDetailSpecialtyById)
 
 
 
