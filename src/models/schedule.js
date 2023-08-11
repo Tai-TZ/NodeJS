@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       //Schedule có key là timeType map với Allcode với key là keyMap, trả lại data bên table Allcode dưới dạng là timeTypeData
       Schedule.belongsTo(models.Allcode, { foreignKey: 'timeType', targetKey: 'keyMap', as: 'timeTypeData' })
 
+
+      //1 bác sĩ có thể đặt nhiều lịch làm, quan hệ 1-N
       Schedule.belongsTo(models.User, { foreignKey: 'doctorId', targetKey: 'id', as: 'doctorData' })
 
     }

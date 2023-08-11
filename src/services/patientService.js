@@ -15,7 +15,9 @@ let buildUrlEmail = (doctorId, token) => {
 let postBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.email || !data.timeType || !data.doctorId || !data.date || !data.fullName) {
+            if (!data.email || !data.timeType || !data.doctorId || !data.date || !data.fullName
+                || !data.selectedGender || !data.address
+            ) {
                 resolve({
                     errCode: 1,
                     errMessage: "Missing required parameters"
@@ -32,12 +34,15 @@ let postBookAppointment = (data) => {
                     redirectLink: buildUrlEmail(data.doctorId, token)
                 })
 
-                //upsert patient: tim thay thi trả ra user # khong tim thay thi create
+                //upsert patient: tim thay thi trả ra user # khong tim thay thi create trong table users
                 let user = await db.User.findOrCreate({
                     where: { email: data.email },
                     defaults: {
                         email: data.email,
                         roleId: 'R3',
+                        address: data.address,
+                        gender: data.selectedGender,
+                        firstName: data.fullName
                     },
                     raw: true
                 });

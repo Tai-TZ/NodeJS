@@ -13,9 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Allcode, { foreignKey: 'positionId', targetKey: 'keyMap', as: 'positionData' })
       User.belongsTo(models.Allcode, { foreignKey: 'gender', targetKey: 'keyMap', as: 'genderData' })
       User.hasOne(models.Markdown, { foreignKey: 'doctorId' })
+
+
       User.hasOne(models.Doctor_Infor, { foreignKey: 'doctorId' })
 
+
+      //1 bác sĩ có thể đặt nhiều lịch làm quan hệ 1-N
       User.hasMany(models.Schedule, { foreignKey: 'doctorId', as: 'doctorData' })
+
+
+      // 1 bệnh nhân có nhiều lịch hẹn quan hệ 1-N
+      User.hasMany(models.Booking, { foreignKey: 'patientId', as: 'patientData' })
+
 
     }
   };

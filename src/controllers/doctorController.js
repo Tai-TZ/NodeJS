@@ -129,6 +129,25 @@ let getProfileDoctorById = async (req, res) => {
     }
 }
 
+
+
+
+//lấy ra danh sách các lịch khám của bệnh nhân
+let getListPatientForDoctor = async (req, res) => {
+    try {
+        let infor = await doctorService.getListPatientForDoctor(req.query.doctorId, req.query.date)
+        return res.status(200).json(infor)
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from server...'
+        })
+    }
+}
+
+
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
@@ -137,5 +156,6 @@ module.exports = {
     bulkCreateSchedule: bulkCreateSchedule,
     getScheduleByDate: getScheduleByDate,
     getExtraInforDoctorById: getExtraInforDoctorById,
-    getProfileDoctorById: getProfileDoctorById
+    getProfileDoctorById: getProfileDoctorById,
+    getListPatientForDoctor: getListPatientForDoctor
 }
