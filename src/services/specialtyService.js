@@ -1,7 +1,7 @@
 
 import db from '../models/index'
 
-//tạo chuyên khoá mới
+//tạo chuyên khoa mới
 let createSpecialty = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -78,10 +78,11 @@ let getDetailSpecialtyById = (inputId, location) => {
 
 
 
+                //lấy doctor tại specialty đó
                 if (data) {
                     let doctorSpecialty = []
                     if (location === 'ALL') {
-                        //tìm tất cả các bản ghi có specialtyId là inputId truyền vào
+                        //tìm tất cả các doctor có specialtyId là inputId truyền vào
                         doctorSpecialty = await db.Doctor_Infor.findAll({
                             where: {
                                 specialtyId: inputId
