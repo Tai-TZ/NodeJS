@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
 
       // 1 bệnh nhân có nhiều lịch hẹn quan hệ 1-N
       Booking.belongsTo(models.User, { foreignKey: 'patientId', targetKey: 'id', as: 'patientData' })
+
+      Booking.belongsTo(models.Allcode, { foreignKey: 'timeType', targetKey: 'keyMap', as: 'timeTypeDataPatient' })
+
     }
   };
   Booking.init({

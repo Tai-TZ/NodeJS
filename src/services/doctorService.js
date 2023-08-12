@@ -469,6 +469,9 @@ let getListPatientForDoctor = (doctorId, date) => {
                                 }
                             ]
                         },
+                        { //lấy giờ bên bản allcode
+                            model: db.Allcode, as: 'timeTypeDataPatient', attributes: ['valueEn', 'valueVi']
+                        }
                     ],
                     raw: false,
                     nest: true // các thuộc tính chung 1 object thì sẽ gom nhóm lại cho dễ nhìn

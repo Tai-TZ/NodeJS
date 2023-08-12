@@ -20,7 +20,7 @@ let handleUserLogin = (email, password) => {
             if (isExist) {
                 //tìm user 
                 let user = await db.User.findOne({ //sequenlize
-                    attributes: ['email', 'roleId', 'password', 'firstName', 'lastName'], //cần lấy pass để compare
+                    attributes: ['id', 'email', 'roleId', 'password', 'firstName', 'lastName'], //cần lấy pass để compare
                     where: { email: email },
                     raw: true, //lấy đầy đủ dữ liệu từ db *dạng object
                 })
