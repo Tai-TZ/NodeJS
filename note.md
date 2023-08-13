@@ -70,7 +70,7 @@
 
 8. npm i --save react-number-format@4.6.4: thư viện React được sử dụng để hiển thị các con số theo quy tắc, kiểu định dạng và các tùy chọn khác nhau.
 
-
+9. npm install --save-exact react-loading-overlay@1.0.1: thư viện loading-overlay@
 
 
 
