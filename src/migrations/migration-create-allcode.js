@@ -1,16 +1,16 @@
 'use strict';
 module.exports = {
-    //up = create - down = drop table
+  //up = create - down = drop table
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('allcodes', {
-       
+
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      key: {
+      keyMap: {
         type: Sequelize.STRING
       },
       type: {
@@ -22,7 +22,7 @@ module.exports = {
       valueVi: {
         type: Sequelize.STRING
       },
-      
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

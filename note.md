@@ -11,8 +11,16 @@
 # *Giúp cho có thể vừa code project bởi Nodejs mới và project bởi Nodejs cũ *
 # 1. Gỡ Nodejs hiện tại, 2. install nvm trên github, 3.install nodejs(cài các version nodejs muốn cài) nvm install *node_ver, 4 Chỉ sử dụng một version nodejs, nvm use *node_ver
 
+# Sử dụng Emitter event để clear data, 1 component FIRE EVENT , 1 component LISTEN EVENT
+
+# req.body (POST) , req.query (GET)
 
 
+# #################################################################################
+# Fix lỗi đặt tên tablename của Sequelize: mặc định những table đứng 1 mình thì sẽ bị sqlize thêm "s" -> không tìm thấy ví dụ: "database.tables",   cách fix thêm ** freezeTableName: true ** vào bên dưới  modelName: trong model của table đó
+
+
+# NODEJS
 1. npm init: khởi tạo dự án
 
 2. npm i body-parser@1.19.0 dotenv@8.2.0 ejs@3.1.5 express@4.17.1
@@ -40,14 +48,29 @@
     
 10. npm i --save cors@2.8.5 : cầu hình cho server chạy api vào tên miền cụ thể, dùng để fix lỗi cors
 
+11. npm i --save-exact nodemailer@6.6.3: Cài nodemailer để làm chức năng gửi mail
 
+12. npm i --save-exact uuid@8.3.2: tạo ra 1 chuỗi định dạng duy nhất cho ID (tạo token)
 
+# REACTJS
+1. Redux for Reactjs: thư viện quản lý state như localstorage nhưng bảo mật hơn 
 
+2. React Slick: npm install --save react-slick@0.28.1, thư viện css như bootstraps
+    slick carousel: npm install --save slick-carousel@1.8.1: tạo các img, text,.. thành slideshow đẹp 
 
+3. react-redux: thư viện giúp conn redux - react
 
+4. react-image-lightbox: npm i --save  react-image-lightbox@5.1.1, thư viện giúp phóng to ảnh
 
+5. react-markdown-editor-lite: npm install --save react-markdown-editor-lite@1.3.0 dùng để tạo một trình soạn thảo markdown trong ứng dụng web, ví dụ: tạo blog, tạo trang chi tiết ng dùng
 
+6. dependency của "react-markdown-editor-lite":  npm install --save markdown-it@12.1.0
 
+7. react-select:  npm install --save react-select@4.3.1, tích hợp vừa SEARCH vừa SELECT
+
+8. npm i --save react-number-format@4.6.4: thư viện React được sử dụng để hiển thị các con số theo quy tắc, kiểu định dạng và các tùy chọn khác nhau.
+
+9. npm install --save-exact react-loading-overlay@1.0.1: thư viện loading-overlay@
 
 
 

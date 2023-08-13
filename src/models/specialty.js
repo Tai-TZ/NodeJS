@@ -13,10 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Specialty.init({ 
+  Specialty.init({
     name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    image: DataTypes.STRING, 
+    descriptionHTML: DataTypes.TEXT,
+    descriptionMarkdown: DataTypes.TEXT,
+    image: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'Specialty',
